@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Local AarogyaAI node
+  aarogyaai-node:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    container_name: aarogyaai-local-node
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_TYPE=local
+      - LOG_LEVEL=INFO
+    volumes:
+      - aarogyaai-data:/app/data
+    networks:
+      - aarogyaai-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Mock council stub (for development)
+  # In production, this would be replaced with actual cloud LLM endpoints
+  council-stub:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.council-stub
+    container_name: council-stub
+    ports:
+      - "8001:8001"
+    networks:
+      - aarogyaai-network
+    restart: unless-stopped
+
+volumes:
+  aarogyaai-data:
+    driver: local
+
+networks:
+  aarogyaai-network:
+    driver: bridge

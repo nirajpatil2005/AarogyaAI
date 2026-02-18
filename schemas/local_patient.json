@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LocalPatientRecord",
+  "description": "Schema for local patient data stored encrypted on device/hospital node",
+  "type": "object",
+  "required": ["patient_id", "age", "sex"],
+  "properties": {
+    "patient_id": {
+      "type": "string",
+      "description": "Local unique identifier (never sent to cloud)"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "sex": {
+      "type": "string",
+      "enum": ["M", "F", "O", "U"],
+      "description": "M=Male, F=Female, O=Other, U=Unknown"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name - NEVER sent to cloud"
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date - converted to age for cloud"
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Known chronic conditions"
+    },
+    "medications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "dosage": {"type": "string"},
+          "frequency": {"type": "string"},
+          "started_date": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    "allergies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {"type": "string", "format": "date-time"},
+          "symptoms": {"type": "array", "items": {"type": "string"}},
+          "diagnosis": {"type": "string"},
+          "notes": {"type": "string"}
+        }
+      },
+      "description": "Patient medical history records"
+    },
+    "lab_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "test_name": {"type": "string"},
+          "value": {"type": "number"},
+          "unit": {"type": "string"},
+          "timestamp": {"type": "string", "format": "date-time"},
+          "reference_range": {"type": "string"}
+        }
+      }
+    }
+  }
+}

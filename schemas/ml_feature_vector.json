@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MLFeatureVector",
+  "description": "Feature vector for local ML model prediction",
+  "type": "object",
+  "required": ["features", "feature_names"],
+  "properties": {
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Numeric feature values"
+    },
+    "feature_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of features (must match training data)"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "extraction_timestamp": {"type": "string", "format": "date-time"},
+        "version": {"type": "string"},
+        "preprocessing_params": {"type": "object"}
+      }
+    }
+  }
+}

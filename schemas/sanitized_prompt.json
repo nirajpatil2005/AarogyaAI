@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SanitizedPrompt",
+  "description": "De-identified, sanitized data sent to cloud LLM council",
+  "type": "object",
+  "required": ["fingerprint", "age", "sex", "task"],
+  "properties": {
+    "fingerprint": {
+      "type": "string",
+      "description": "SHA256 hash for caching and auditing",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "sex": {
+      "type": "string",
+      "enum": ["M", "F", "O", "U"]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Anonymized condition list"
+    },
+    "symptoms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Relative time descriptors (e.g., '2 days ago')"
+    },
+    "numeric_findings": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      },
+      "description": "Rounded lab values (2 sig figs max)"
+    },
+    "task": {
+      "type": "string",
+      "description": "What the LLM should do (must include 'Return JSON only' instruction)"
+    },
+    "context": {
+      "type": "string",
+      "description": "Additional sanitized context"
+    }
+  },
+  "additionalProperties": false
+}
