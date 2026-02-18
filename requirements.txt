@@ -1,0 +1,45 @@
+# Core runtime
+python>=3.11
+fastapi>=0.95.0
+uvicorn[standard]>=0.21.0
+
+# Local DB and encryption
+sqlcipher3-binary>=0.4.0     # or use pysqlcipher3 per platform
+
+# Data handling
+pandas>=2.1.0
+pydantic>=2.3.0
+
+# Embeddings & vector index
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+
+# Local model inference (optional)
+llama-cpp-python>=0.1.73    # only if using local quantized models
+
+# ML for tabular model (MVP)
+xgboost>=1.7.6
+scikit-learn>=1.2.2
+
+# Federated learning
+flower>=2.1.0
+
+# Privacy & DP
+opacus>=1.1.1               # PyTorch DP helper (if using PyTorch)
+google-differential-privacy>=1.0.0  # optional, verify compatibility
+
+# Utilities
+python-dotenv>=1.0.0
+requests>=2.31.0
+httpx>=0.24.0
+pytest>=8.4.0
+black>=23.9.0
+ruff>=0.12.0
+mypy>=1.5.1
+
+# Security
+cryptography>=41.0.0
+
+# NOTE:
+# Pin versions for production.
+# Some packages may require platform-specific builds (faiss, sqlcipher).
