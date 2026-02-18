@@ -21,11 +21,11 @@ xgboost>=1.7.6
 scikit-learn>=1.2.2
 
 # Federated learning
-flower>=2.1.0
+flwr>=1.0.0
 
 # Privacy & DP
 opacus>=1.1.1               # PyTorch DP helper (if using PyTorch)
-google-differential-privacy>=1.0.0  # optional, verify compatibility
+# google-differential-privacy>=1.0.0  # optional, not available on PyPI
 
 # Utilities
 python-dotenv>=1.0.0
