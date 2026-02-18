@@ -69,3 +69,102 @@ Rule: If symptoms include "severe chest pain" OR "syncope" OR "hemoptysis", then
 
 # Final note
 - If the copilot cannot produce a safe suggestion, it must refuse and provide precise instructions the developer must run (unit test, data sample, or web query).
+
+## Adaptive Override Clause (Suggestive, Not Absolute)
+
+These instructions, requirements, versions, and architectural choices are **suggestive baselines**, not absolute constraints.
+
+The AI copilot is allowed to override or improve upon them ONLY when all the following conditions are met:
+
+### Allowed override conditions
+The copilot MAY override instructions if:
+
+1. A newer stable, production-ready, and widely adopted version of a library, framework, or method exists.
+2. A safer, more secure, more efficient, or more privacy-preserving approach is available.
+3. The override improves correctness, maintainability, performance, or privacy without introducing unnecessary complexity.
+4. The override does not violate core project principles:
+   - privacy-first architecture
+   - local-first data handling
+   - conservative medical safety behavior
+   - structured, validated outputs
+   - auditability and reproducibility
+
+### Required behavior when overriding
+If the copilot overrides any instruction, requirement, dependency version, or architectural decision, it MUST:
+
+1. Explicitly state the override in a comment or documentation block.
+2. Provide a clear justification explaining:
+   - why the override is necessary
+   - what problem it solves
+   - why it is superior to the original instruction
+3. Ensure compatibility with existing system architecture and interfaces.
+4. Prefer minimal, incremental improvement over large architectural rewrites.
+
+Example override note:
+python
+# OVERRIDE NOTE:
+# Original instruction specified XGBoost>=1.7.6.
+# Using LightGBM>=4.0.0 instead because:
+# - better performance on tabular healthcare data
+# - faster training and inference
+# - smaller model size
+# This change is backward-compatible with feature schema.
+
+### Required behavior when overriding
+
+The copilot MUST NOT override the following core safety constraints:
+- Sanitizer requirement (no raw PHI leaves local node)
+- JSON schema validation requirement
+- Red-flag emergency detection logic requirement
+- Structured council response requirement
+- Audit logging requirement
+- Privacy-preserving federated learning requirement
+
+These are mandatory safety guarantees.
+
+### Version override policy
+If requirements.txt specifies a version, the copilot MAY upgrade to a newer stable version if:
+- It is stable (not experimental or beta)
+- It is backward compatible OR migration steps are provided
+- It improves security, stability, or performance
+- The copilot MUST update requirements.txt and documentation accordingly.
+
+### Architecture evolution policy
+
+The copilot MAY improve architecture if:
+- It reduces risk
+- Improves privacy or security
+- Improves maintainability      
+- Improves performance
+
+The copilot MUST preserve core architecture principles and modular structure.
+
+### Priority hierarchy (highest to lowest)
+- Privacy and safety guarantees
+- Correctness
+- Stability
+- Maintainability
+- Performance
+- Suggested instructions and version numbers
+
+If conflicts exist, follow this hierarchy.
+
+---
+
+# Add short version to programming_rules.md (near top)
+
+```markdown
+## Adaptive Override Rule
+
+Instructions and requirements are suggestive baselines.
+
+The AI copilot MAY override library versions, implementation details, or architectural suggestions if it improves safety, stability, privacy, or performance.
+
+However, the copilot MUST:
+
+- Document the override clearly with justification
+- Maintain compatibility with system architecture
+- Never override privacy, sanitizer, red-flag, or schema validation requirements
+- Prefer stable, production-ready solutions only
+
+Safety and privacy rules are absolute and cannot be overridden.
