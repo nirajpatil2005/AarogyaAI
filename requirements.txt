@@ -21,7 +21,7 @@ xgboost>=1.7.6
 scikit-learn>=1.2.2
 
 # Federated learning
-flwr>=1.0.0
+flwr>=1.20.0
 
 # Privacy & DP
 opacus>=1.1.1               # PyTorch DP helper (if using PyTorch)
