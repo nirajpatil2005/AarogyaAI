@@ -75,7 +75,11 @@ class LocalHealthModel:
 
         # Split data for validation
         X_train, X_val, y_train, y_val = train_test_split(
-            X, y, test_size=validation_split, random_state=42, stratify=y if len(np.unique(y)) > 1 else None
+            X,
+            y,
+            test_size=validation_split,
+            random_state=42,
+            stratify=y if len(np.unique(y)) > 1 else None,
         )
 
         # Initialize and train model
@@ -251,9 +255,7 @@ class LocalHealthModel:
         importance_scores = self.model.feature_importances_
         feature_names = self.feature_extractor.feature_names
 
-        return {
-            name: float(score) for name, score in zip(feature_names, importance_scores)
-        }
+        return {name: float(score) for name, score in zip(feature_names, importance_scores)}
 
 
 def generate_synthetic_training_data(n_samples: int = 1000) -> tuple[np.ndarray, np.ndarray]:

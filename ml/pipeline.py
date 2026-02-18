@@ -68,9 +68,7 @@ class LocalPredictionPipeline:
             Complete prediction results
         """
         # Step 1: Red-flag check (emergency detection)
-        red_flag_result = self.red_flag_engine.evaluate(
-            symptoms=symptoms, vitals=vitals or {}
-        )
+        red_flag_result = self.red_flag_engine.evaluate(symptoms=symptoms, vitals=vitals or {})
 
         # If emergency, return immediately
         if red_flag_result.is_emergency:
@@ -80,7 +78,7 @@ class LocalPredictionPipeline:
                 "Call emergency services (911) or go to nearest emergency room",
                 "Do not delay - this may be a medical emergency",
             ]
-            
+
             # Still log the query
             self.storage.store_query(
                 {
@@ -204,9 +202,7 @@ class LocalPredictionPipeline:
 
         return recommendations
 
-    def train_model(
-        self, n_samples: int = 1000, save: bool = True
-    ) -> dict[str, float]:
+    def train_model(self, n_samples: int = 1000, save: bool = True) -> dict[str, float]:
         """
         Train the local ML model.
         In production, this would use real encrypted patient data.

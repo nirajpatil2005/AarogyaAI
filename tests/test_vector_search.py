@@ -18,11 +18,11 @@ def mock_encoder():
     """Mock sentence transformer encoder"""
     mock = Mock()
     mock.get_sentence_embedding_dimension.return_value = 384
-    
+
     def mock_encode(texts, convert_to_numpy=True):
         # Return embeddings with shape (len(texts), 384)
         return np.random.rand(len(texts) if isinstance(texts, list) else 1, 384).astype("float32")
-    
+
     mock.encode = mock_encode
     return mock
 
@@ -40,7 +40,7 @@ def temp_paths():
 def vector_search(temp_paths, mock_encoder):
     """Create vector search instance for testing"""
     index_path, metadata_path = temp_paths
-    
+
     with patch("ml.vector_search.SentenceTransformer") as mock_st:
         mock_st.return_value = mock_encoder
         vs = VectorSearch(index_path=index_path, metadata_path=metadata_path)
@@ -53,7 +53,7 @@ class TestVectorSearch:
     def test_initialization(self, temp_paths, mock_encoder):
         """Test vector search initialization"""
         index_path, metadata_path = temp_paths
-        
+
         with patch("ml.vector_search.SentenceTransformer") as mock_st:
             mock_st.return_value = mock_encoder
             vs = VectorSearch(index_path=index_path, metadata_path=metadata_path)
@@ -108,7 +108,7 @@ class TestVectorSearch:
 
         with patch("ml.vector_search.SentenceTransformer") as mock_st:
             mock_st.return_value = mock_encoder
-            
+
             # Create and save
             vs1 = VectorSearch(index_path=index_path, metadata_path=metadata_path)
             vs1.add_documents(["doc1", "doc2", "doc3"])

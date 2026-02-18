@@ -231,9 +231,7 @@ class VectorSearch:
         }
 
 
-def index_patient_history(
-    vector_search: VectorSearch, history_records: list[dict[str, Any]]
-):
+def index_patient_history(vector_search: VectorSearch, history_records: list[dict[str, Any]]):
     """
     Index patient history records for semantic search.
 

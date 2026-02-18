@@ -25,14 +25,14 @@ def pipeline(temp_dir):
     with patch("ml.vector_search.SentenceTransformer") as mock_st:
         import numpy as np
         from unittest.mock import Mock
-        
+
         mock_encoder = Mock()
         mock_encoder.get_sentence_embedding_dimension.return_value = 384
         mock_encoder.encode = lambda texts, **kwargs: np.random.rand(
             len(texts) if isinstance(texts, list) else 1, 384
         ).astype("float32")
         mock_st.return_value = mock_encoder
-        
+
         pipeline = LocalPredictionPipeline(
             model_path=str(Path(temp_dir) / "model.json"),
             storage_path=str(Path(temp_dir) / "storage.db"),

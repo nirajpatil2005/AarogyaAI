@@ -105,7 +105,7 @@ class TestLocalHealthModel:
         model1 = LocalHealthModel(model_path=str(temp_model_path))
         X, y = generate_synthetic_training_data(n_samples=200)
         model1.train(X, y)
-        
+
         # Make prediction with original model
         test_features = np.random.rand(16)
         pred1 = model1.predict(test_features)

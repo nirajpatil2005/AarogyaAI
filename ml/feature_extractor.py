@@ -3,7 +3,6 @@ Feature extractor for ML model.
 Converts patient data into feature vectors for prediction.
 """
 
-
 import numpy as np
 
 from llm.schemas import LocalPatientRecord, MLFeatureVector

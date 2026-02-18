@@ -42,7 +42,10 @@ class EncryptedStorage:
     def _get_connection(self) -> sqlite.Connection:
         """Get database connection with encryption enabled"""
         conn = sqlite.connect(self.db_path)
-        conn.execute(f"PRAGMA key = '{self.key}'")
+        # Sanitize key by escaping single quotes (SQLCipher requirement)
+        # The key should be from a trusted source (environment variable or config)
+        safe_key = self.key.replace("'", "''")
+        conn.execute(f"PRAGMA key = '{safe_key}'")
         conn.execute("PRAGMA cipher_compatibility = 4")
         return conn
 
@@ -51,8 +54,7 @@ class EncryptedStorage:
         conn = self._get_connection()
         try:
             # Patient records table
-            conn.execute(
-                """
+            conn.execute("""
                 CREATE TABLE IF NOT EXISTS patient_records (
                     patient_id TEXT PRIMARY KEY,
                     age INTEGER NOT NULL,
@@ -65,12 +67,10 @@ class EncryptedStorage:
                     created_at TEXT NOT NULL,
                     updated_at TEXT NOT NULL
                 )
-            """
-            )
+            """)
 
             # Query history table
-            conn.execute(
-                """
+            conn.execute("""
                 CREATE TABLE IF NOT EXISTS query_history (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     device_id TEXT NOT NULL,
@@ -84,12 +84,10 @@ class EncryptedStorage:
                     timestamp TEXT NOT NULL,
                     FOREIGN KEY (patient_id) REFERENCES patient_records (patient_id)
                 )
-            """
-            )
+            """)
 
             # Lab results table
-            conn.execute(
-                """
+            conn.execute("""
                 CREATE TABLE IF NOT EXISTS lab_results (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     patient_id TEXT NOT NULL,
@@ -100,12 +98,10 @@ class EncryptedStorage:
                     reference_range TEXT,
                     FOREIGN KEY (patient_id) REFERENCES patient_records (patient_id)
                 )
-            """
-            )
+            """)
 
             # Patient history table
-            conn.execute(
-                """
+            conn.execute("""
                 CREATE TABLE IF NOT EXISTS patient_history (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     patient_id TEXT NOT NULL,
@@ -115,8 +111,7 @@ class EncryptedStorage:
                     timestamp TEXT NOT NULL,
                     FOREIGN KEY (patient_id) REFERENCES patient_records (patient_id)
                 )
-            """
-            )
+            """)
 
             conn.commit()
         finally:
