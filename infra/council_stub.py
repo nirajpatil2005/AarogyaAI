@@ -2,9 +2,10 @@
 Mock council stub for development.
 Simulates cloud LLM council responses.
 """
+
+
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List
 
 app = FastAPI(title="Mock Council Stub")
 
@@ -13,8 +14,8 @@ class SanitizedPrompt(BaseModel):
     fingerprint: str
     age: int
     sex: str
-    conditions: List[str]
-    symptoms: List[str]
+    conditions: list[str]
+    symptoms: list[str]
     task: str
 
 
@@ -26,8 +27,8 @@ class Differential(BaseModel):
 
 class CouncilResponse(BaseModel):
     model_id: str
-    differentials: List[Differential]
-    recommended_next_steps: List[str]
+    differentials: list[Differential]
+    recommended_next_steps: list[str]
     confidence: float
     red_flag: bool
 
@@ -41,17 +42,17 @@ async def gpt4_stub(prompt: SanitizedPrompt):
             Differential(
                 label="Common cold",
                 probability=0.6,
-                rationale="Symptoms suggest possible upper respiratory infection"
+                rationale="Symptoms suggest possible upper respiratory infection",
             )
         ],
         recommended_next_steps=[
             "Monitor symptoms",
             "Stay hydrated",
             "Rest",
-            "Contact provider if symptoms worsen"
+            "Contact provider if symptoms worsen",
         ],
         confidence=0.7,
-        red_flag=False
+        red_flag=False,
     )
 
 
@@ -64,16 +65,16 @@ async def claude_stub(prompt: SanitizedPrompt):
             Differential(
                 label="Viral infection",
                 probability=0.65,
-                rationale="Pattern consistent with viral illness"
+                rationale="Pattern consistent with viral illness",
             )
         ],
         recommended_next_steps=[
             "Rest and hydration",
             "Monitor temperature",
-            "Seek care if symptoms persist"
+            "Seek care if symptoms persist",
         ],
         confidence=0.72,
-        red_flag=False
+        red_flag=False,
     )
 
 
