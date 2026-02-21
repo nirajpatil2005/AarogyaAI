@@ -1,0 +1,149 @@
+"""
+Council Orchestrator — 3-stage LLM Council protocol (all-Groq, optimised for speed).
+
+Stage 1: Divergence  — parallel fan-out to Members A, B, C
+Stage 2: Convergence — lightweight peer-ranking (compact prompt, fast model)
+Stage 3: Synthesis   — Chairman merges top responses into final answer
+"""
+import asyncio
+import json
+from council.groq_client import query_council_parallel, query_groq, COUNCIL_MODELS
+
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _safe_parse_json(text: str) -> dict:
+    """Extract the first JSON object from a model response."""
+    if not text:
+        return {}
+    try:
+        start = text.find("{")
+        end   = text.rfind("}") + 1
+        if start != -1 and end > start:
+            return json.loads(text[start:end])
+    except Exception:
+        pass
+    return {"raw": text[:300]}   # cap raw fallback to avoid huge payloads
+
+
+def _summarise_response(parsed: dict) -> str:
+    """
+    Compact one-line summary of a council member's response.
+    Used in convergence to keep the peer-review prompt small and fast.
+    """
+    diffs = ", ".join(parsed.get("differentials", [])[:3]) or "none"
+    conf  = parsed.get("confidence", "?")
+    rf    = parsed.get("red_flag", False)
+    return f"Differentials: {diffs} | Confidence: {conf} | RedFlag: {rf}"
+
+
+# ── Stage 1: Divergence ───────────────────────────────────────────────────────
+
+async def run_divergence(sanitized_prompt: str) -> dict[str, dict]:
+    """Fan-out to all council members in parallel. Returns parsed JSON per member."""
+    raw_responses = await query_council_parallel(sanitized_prompt)
+    return {name: _safe_parse_json(text) for name, text in raw_responses.items()}
+
+
+# ── Stage 2: Convergence ──────────────────────────────────────────────────────
+
+async def run_convergence(
+    sanitized_prompt: str,
+    divergence_results: dict[str, dict],
+) -> dict:
+    """
+    Lightweight peer review — send compact summaries (not full JSON) to the
+    fastest model. Returns ranking + reasoning.
+    """
+    members = list(divergence_results.keys())
+    anon_map = {m: chr(65 + i) for i, m in enumerate(members)}   # A, B, C
+
+    # Build a compact summary block — much smaller than full JSON dumps
+    summary_lines = "\n".join(
+        f"  {anon_map[m]}: {_summarise_response(divergence_results[m])}"
+        for m in members
+    )
+
+    review_prompt = (
+        f"Case: {sanitized_prompt[:300]}\n\n"
+        f"Council member summaries:\n{summary_lines}\n\n"
+        f"Task: Rank the responses A, B, C by clinical accuracy and reasoning quality.\n"
+        f"Output ONLY this JSON (no other text):\n"
+        f'{{"ranking": ["A", "B", "C"], "reasoning": "brief reason"}}'
+    )
+
+    # Use the dedicated fast reviewer model for peer ranking
+    review_text = await query_groq(
+        COUNCIL_MODELS["reviewer"],
+        [
+            {"role": "system", "content": "You are a clinical peer reviewer. Output only valid JSON."},
+            {"role": "user",   "content": review_prompt},
+        ],
+        temperature=0.1,
+        max_tokens=80,
+    )
+
+    peer_review = _safe_parse_json(review_text)
+    # Fallback: if model didn't return a proper ranking, use default order
+    if not peer_review.get("ranking"):
+        peer_review = {"ranking": list(anon_map.values()), "reasoning": "default order"}
+
+    return {
+        "anon_map":           anon_map,
+        "peer_review":        peer_review,
+        "divergence_results": divergence_results,
+    }
+
+
+# ── Stage 3: Synthesis ────────────────────────────────────────────────────────
+
+async def run_synthesis(sanitized_prompt: str, convergence_data: dict) -> dict:
+    """
+    Chairman synthesises the top-ranked response into a final clinical answer.
+    Only sends the top-ranked member's data to keep the prompt compact.
+    """
+    divergence_results = convergence_data["divergence_results"]
+    peer_review        = convergence_data["peer_review"]
+    anon_map           = convergence_data["anon_map"]
+
+    # Identify the top-ranked member
+    ranking = peer_review.get("ranking", [])
+    rev_map = {v: k for k, v in anon_map.items()}   # letter → member key
+    top_key = rev_map.get(ranking[0]) if ranking else list(divergence_results.keys())[0]
+    top_response = divergence_results.get(top_key, {})
+
+    synthesis_prompt = (
+        f"Case: {sanitized_prompt[:400]}\n\n"
+        f"Best council response:\n{json.dumps(top_response, indent=2)}\n\n"
+        f"Peer ranking: {ranking} — Reasoning: {peer_review.get('reasoning','')}\n\n"
+        f"Synthesise a final clinical answer. "
+        f"Reply ONLY with JSON keys: "
+        f"\"final_differentials\" (list), \"recommended_next_steps\" (list), "
+        f"\"confidence\" (float 0-1), \"red_flag\" (boolean), \"summary\" (string ≤3 sentences)."
+    )
+
+    chairman_text = await query_groq(
+        COUNCIL_MODELS["chairman"],
+        [
+            {"role": "system", "content": "You are the Chairman of a medical AI council. Be concise and accurate."},
+            {"role": "user",   "content": synthesis_prompt},
+        ],
+        temperature=0.2,
+        max_tokens=600,
+    )
+
+    return _safe_parse_json(chairman_text)
+
+
+# ── Full pipeline (used by non-SSE callers) ───────────────────────────────────
+
+async def orchestrate(sanitized_prompt: str) -> dict:
+    divergence  = await run_divergence(sanitized_prompt)
+    convergence = await run_convergence(sanitized_prompt, divergence)
+    synthesis   = await run_synthesis(sanitized_prompt, convergence)
+    return {
+        "stage":       "complete",
+        "divergence":  divergence,
+        "convergence": convergence["peer_review"],
+        "synthesis":   synthesis,
+    }

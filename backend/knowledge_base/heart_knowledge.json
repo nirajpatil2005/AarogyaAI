@@ -1,0 +1,92 @@
+[
+    {
+        "id": "heart_001",
+        "topic": "Coronary Artery Disease (CAD)",
+        "source": "AHA/ACC Guidelines 2023",
+        "content": "Coronary artery disease (CAD) is the most common type of heart disease. It occurs when the arteries that supply blood to heart muscle become hardened and narrowed due to buildup of cholesterol and plaque (atherosclerosis). Symptoms include chest pain (angina), shortness of breath, and fatigue. Risk factors: high blood pressure, high cholesterol, smoking, diabetes, obesity, sedentary lifestyle, family history. Diagnosis involves ECG, stress tests, echocardiogram, cardiac catheterization, CT coronary angiography. Treatment includes lifestyle changes, medications (statins, aspirin, beta-blockers, ACE inhibitors), and procedures (angioplasty, stenting, CABG surgery)."
+    },
+    {
+        "id": "heart_002",
+        "topic": "Myocardial Infarction (Heart Attack)",
+        "source": "WHO Cardiovascular Disease Factsheet / AHA Guidelines",
+        "content": "Myocardial infarction (MI) occurs when blood flow to the heart muscle is abruptly cut off, causing tissue damage. Key symptoms: crushing chest pain or pressure radiating to left arm, jaw, or back; shortness of breath; cold sweat; nausea; lightheadedness. STEMI shows ST-elevation on ECG; NSTEMI shows elevated troponins without ST-elevation. Immediate treatment: aspirin 325mg, nitroglycerin, oxygen if SpO2<90%, morphine for pain, dual antiplatelet therapy. Reperfusion: PCI within 90 minutes (door-to-balloon) or fibrinolytic therapy within 30 minutes if PCI not available. Post-MI: beta-blockers, ACE inhibitors, statins, cardiac rehabilitation."
+    },
+    {
+        "id": "heart_003",
+        "topic": "Heart Failure",
+        "source": "AHA/ACC/HFSA Heart Failure Guidelines 2022",
+        "content": "Heart failure (HF) is a condition where the heart cannot pump enough blood to meet the body's needs. Types: HFrEF (reduced ejection fraction, EF≤40%), HFmrEF (mildly reduced, EF 41-49%), HFpEF (preserved, EF≥50%). Symptoms: dyspnea (especially on exertion or lying flat), fatigue, ankle swelling, rapid weight gain, persistent cough. NYHA Classification: Class I (no limitation), II (slight limitation), III (marked limitation), IV (symptoms at rest). Diagnosis: BNP/NT-proBNP levels, echocardiogram, chest X-ray. Treatment: ACE inhibitors/ARBs, beta-blockers (carvedilol, metoprolol), mineralocorticoid receptor antagonists (spironolactone), SGLT2 inhibitors (dapagliflozin, empagliflozin), diuretics for fluid overload, ICD/CRT for select patients."
+    },
+    {
+        "id": "heart_004",
+        "topic": "Atrial Fibrillation (AFib)",
+        "source": "AHA/ACC/HRS Atrial Fibrillation Guidelines 2023",
+        "content": "Atrial fibrillation (AFib) is the most common cardiac arrhythmia, characterized by rapid and irregular beating of the atrial chambers. Symptoms: palpitations, fatigue, dizziness, shortness of breath, chest discomfort. Can be asymptomatic. Risk factors: age >65, hypertension, heart disease, diabetes, obesity, thyroid disease, alcohol use. CHA₂DS₂-VASc score determines stroke risk and need for anticoagulation. HAS-BLED score assesses bleeding risk. Treatment: rate control (beta-blockers, calcium channel blockers, digoxin), rhythm control (amiodarone, flecainide, cardioversion), anticoagulation (DOACs preferred: apixaban, rivaroxaban, edoxaban, dabigatran), catheter ablation for drug-refractory cases."
+    },
+    {
+        "id": "heart_005",
+        "topic": "Hypertension",
+        "source": "AHA/ACC Hypertension Guidelines 2017 (reaffirmed 2023)",
+        "content": "Hypertension is defined as blood pressure ≥130/80 mmHg. Stages: Elevated (120-129/<80), Stage 1 (130-139/80-89), Stage 2 (≥140/≥90), Hypertensive crisis (>180/>120). Primary (essential) hypertension accounts for 90-95% of cases. Secondary causes: renal artery stenosis, pheochromocytoma, Cushing syndrome, primary aldosteronism, coarctation of aorta. Target organ damage: LVH, retinopathy, nephropathy, stroke. First-line medications: ACE inhibitors, ARBs, calcium channel blockers, thiazide diuretics. Lifestyle modifications: DASH diet, sodium restriction (<2300mg/day), regular exercise (150 min/week), weight loss, limit alcohol, smoking cessation."
+    },
+    {
+        "id": "heart_006",
+        "topic": "Valvular Heart Disease",
+        "source": "AHA/ACC Valvular Heart Disease Guidelines 2020",
+        "content": "Valvular heart disease involves damage to or defects in one of the four heart valves: mitral, aortic, tricuspid, or pulmonary. Common conditions: aortic stenosis (most common in elderly, causes syncope, angina, heart failure), mitral regurgitation (causes volume overload, dyspnea), mitral stenosis (often rheumatic, causes dyspnea, hemoptysis, AFib). Diagnosis: echocardiography (transthoracic and transesophageal), cardiac MRI. Grading: mild, moderate, severe based on valve area, gradient, and regurgitant volume. Treatment: medical management for symptoms, surgical valve repair/replacement, transcatheter aortic valve replacement (TAVR) for high-risk surgical candidates. Endocarditis prophylaxis for prosthetic valves."
+    },
+    {
+        "id": "heart_007",
+        "topic": "Cardiac Biomarkers and Diagnostics",
+        "source": "ACC/AHA Clinical Practice Guidelines",
+        "content": "Key cardiac biomarkers: Troponin I/T (gold standard for myocardial injury, rises 3-6h after MI, peaks 12-24h), BNP/NT-proBNP (heart failure marker, BNP>100 pg/mL or NT-proBNP>300 pg/mL suggests HF), CK-MB (less specific than troponin, rises 3-8h), D-dimer (pulmonary embolism/DVT screening), CRP/hs-CRP (inflammation marker, cardiovascular risk). ECG interpretation: ST elevation = acute MI, ST depression = ischemia, Q waves = old MI, prolonged QT = arrhythmia risk, bundle branch blocks. Echocardiography: EF assessment, wall motion abnormalities, valvular function, pericardial effusion. Stress testing: exercise or pharmacologic (dobutamine/adenosine), with ECG or imaging (nuclear/echo)."
+    },
+    {
+        "id": "heart_008",
+        "topic": "Chest Pain Differential Diagnosis",
+        "source": "Emergency Medicine Clinical Guidelines",
+        "content": "Chest pain differential diagnosis in order of severity — Cardiac: acute coronary syndrome (STEMI/NSTEMI/unstable angina), aortic dissection (tearing pain radiating to back, unequal BP in arms), pericarditis (sharp pleuritic pain, worse with inspiration, relieved by sitting forward). Pulmonary: pulmonary embolism (pleuritic pain, dyspnea, tachycardia, risk factors: immobility/surgery), pneumothorax (sudden onset, pleuritic), pneumonia. GI: GERD (burning, positional), esophageal spasm, peptic ulcer. Musculoskeletal: costochondritis (reproducible tenderness). Evaluate using HEART score (History, ECG, Age, Risk factors, Troponin) to risk-stratify. Low HEART score (0-3): outpatient follow-up. High HEART score (≥7): admit and treat."
+    },
+    {
+        "id": "heart_009",
+        "topic": "Lipid Management and Atherosclerosis",
+        "source": "AHA/ACC Cholesterol Management Guidelines 2018",
+        "content": "Atherosclerotic cardiovascular disease (ASCVD) risk is assessed using the Pooled Cohort Equations (10-year risk). Targets: LDL-C reduction by ≥50% for high-risk patients. Statin categories: high-intensity (atorvastatin 40-80mg, rosuvastatin 20-40mg) for ASCVD or LDL≥190, moderate-intensity for diabetes or 10-year risk 7.5-20%. Additional therapies: ezetimibe (if LDL not at goal on max statin), PCSK9 inhibitors (evolocumab, alirocumab) for very high risk. Normal lipid values: Total cholesterol <200, LDL <100 (optimal), HDL >40 (men)/>50 (women), Triglycerides <150. Lifestyle: Mediterranean diet, exercise, omega-3 for triglycerides >500."
+    },
+    {
+        "id": "heart_010",
+        "topic": "Pericarditis and Myocarditis",
+        "source": "ESC Guidelines on Pericardial Diseases 2015",
+        "content": "Pericarditis: inflammation of the pericardium. Causes: viral (most common, Coxsackievirus), bacterial, autoimmune, post-MI (Dressler syndrome), uremia, malignancy. Symptoms: sharp retrosternal chest pain worse with inspiration and supine position, relieved by sitting forward. ECG shows diffuse ST elevation with PR depression. Treatment: NSAIDs (ibuprofen) + colchicine for 3 months, avoid steroids initially. Complications: tamponade (Beck's triad: hypotension, JVD, muffled heart sounds), constrictive pericarditis. Myocarditis: inflammation of myocardium, often viral (parvovirus B19, HHV-6, COVID-19). Presents as chest pain, heart failure, arrhythmias. Diagnosis: elevated troponin, cardiac MRI (Lake Louise criteria), endomyocardial biopsy. Treatment: supportive care, heart failure management, immunosuppression in select cases."
+    },
+    {
+        "id": "heart_011",
+        "topic": "Cardiac Medications Reference",
+        "source": "AHA Pharmacotherapy Guidelines",
+        "content": "Beta-blockers: metoprolol (25-200mg), carvedilol (6.25-25mg BID), atenolol, bisoprolol. Indications: HTN, angina, post-MI, HFrEF, rate control in AFib. ACE inhibitors: lisinopril (5-40mg), enalapril, ramipril. ARBs: losartan (25-100mg), valsartan, candesartan. CCBs: amlodipine (2.5-10mg), diltiazem, verapamil. Antiplatelet: aspirin (81-325mg), clopidogrel (75mg), ticagrelor (90mg BID), prasugrel (10mg). Anticoagulants: warfarin (INR 2-3), apixaban (5mg BID), rivaroxaban (20mg daily), dabigatran (150mg BID). Statins: atorvastatin (10-80mg), rosuvastatin (5-40mg), simvastatin. Diuretics: furosemide (20-80mg), hydrochlorothiazide, spironolactone (25-50mg). Nitrates: nitroglycerin sublingual (0.4mg PRN), isosorbide mononitrate (30-60mg)."
+    },
+    {
+        "id": "heart_012",
+        "topic": "Acute Coronary Syndrome Management",
+        "source": "AHA/ACC ACS Guidelines 2021",
+        "content": "Acute coronary syndrome (ACS) encompasses STEMI, NSTEMI, and unstable angina. Initial management (MONA): Morphine (if pain not relieved by nitrates), Oxygen (if SpO2<90%), Nitroglycerin (sublingual or IV), Aspirin (162-325mg chewed). For STEMI: primary PCI if available within 120 min of first medical contact, otherwise fibrinolytic therapy (tenecteplase, alteplase). Dual antiplatelet therapy (DAPT): aspirin + P2Y12 inhibitor (ticagrelor or prasugrel preferred over clopidogrel for PCI). Anticoagulation: unfractionated heparin or enoxaparin. GPIIb/IIIa inhibitors in select cases. Post-ACS: high-intensity statin, beta-blocker, ACE inhibitor, cardiac rehabilitation. GRACE score or TIMI score for risk stratification."
+    },
+    {
+        "id": "heart_013",
+        "topic": "Cardiomyopathy",
+        "source": "AHA Scientific Statement on Cardiomyopathy",
+        "content": "Cardiomyopathy types: Dilated (DCM) — enlarged ventricles with reduced systolic function, causes include genetic, viral, alcohol, peripartum. Most common form leading to heart transplant. Hypertrophic (HCM) — asymmetric septal hypertrophy, most common cause of sudden cardiac death in young athletes. Features: systolic anterior motion of mitral valve, LVOT obstruction. Diagnosis: echo showing wall thickness >15mm. Restrictive (RCM) — impaired diastolic filling with preserved systolic function, causes include amyloidosis, sarcoidosis, hemochromatosis. Takotsubo (stress cardiomyopathy) — transient LV apical ballooning triggered by emotional/physical stress, mimics ACS. Treatment varies by type: HFrEF guidelines for DCM, avoidance of dehydration/vasodilators for obstructive HCM, ICD for high SCD risk."
+    },
+    {
+        "id": "heart_014",
+        "topic": "Heart-Related Lab Values and Normal Ranges",
+        "source": "Clinical Laboratory Reference Standards",
+        "content": "Normal cardiac lab values: Troponin I: <0.04 ng/mL (elevated >0.4 ng/mL highly suggestive of MI). Troponin T: <14 ng/L (hs-cTnT). BNP: <100 pg/mL (HF unlikely), >400 pg/mL (HF likely). NT-proBNP: age-stratified (<50yo: <450, 50-75yo: <900, >75yo: <1800 pg/mL). CK-MB: <5% of total CK. Total cholesterol: <200 mg/dL. LDL: <100 mg/dL optimal, <70 mg/dL for high risk. HDL: >40 mg/dL (men), >50 mg/dL (women). Triglycerides: <150 mg/dL. HbA1c: <7% for diabetics (cardiovascular risk reduction). hs-CRP: <1 mg/L low risk, 1-3 moderate, >3 high cardiovascular risk. INR: 2.0-3.0 for warfarin therapy. Normal resting HR: 60-100 bpm. Normal BP: <120/80 mmHg."
+    },
+    {
+        "id": "heart_015",
+        "topic": "Preventive Cardiology and Lifestyle Modification",
+        "source": "AHA/ACC Primary Prevention Guidelines 2019",
+        "content": "Primary prevention of cardiovascular disease: assess 10-year ASCVD risk using Pooled Cohort Equations. Risk enhancers: family history of premature ASCVD, metabolic syndrome, chronic kidney disease, chronic inflammatory conditions (RA, psoriasis), ethnicity (South Asian), pregnancy complications (preeclampsia). Lifestyle: heart-healthy diet (Mediterranean or DASH), regular aerobic exercise (≥150 min/week moderate or ≥75 min/week vigorous), maintain BMI 18.5-24.9, waist circumference <40 inches (men)/<35 inches (women), smoking cessation, limit alcohol (≤1 drink/day women, ≤2 men), stress management, adequate sleep (7-9 hours). Aspirin for primary prevention: limited role, consider only for high-risk adults 40-70 without bleeding risk. Coronary artery calcium (CAC) score can help reclassify intermediate-risk patients."
+    }
+]
